@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
-  resources :activities
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'top#index'
+  scope :api do
+    scope :v1 do
+      resources :activities
+    end
+  end
 end
