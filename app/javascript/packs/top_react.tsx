@@ -16,6 +16,21 @@ const data = {
 const App = ({name: string}) => (
   <>
     <Circle r={200} data={data} />
+    <table>
+      <tr>
+        <th>name </th>
+        <th>amount</th>
+      </tr>
+      {
+        data.elements.map ( e => {
+          return <tr>
+            <td>{e.name}</td>
+            <td>{e.amount}</td>
+          </tr>
+        }
+        )
+      }
+    </table>
   </>
 )
 
