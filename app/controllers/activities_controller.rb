@@ -12,6 +12,10 @@ class ActivitiesController < ApplicationController
   def show
   end
 
+  def stat
+      render json: { name: "yamada"}
+  end
+
   # GET /activities/new
   def new
     @activity = Activity.new
