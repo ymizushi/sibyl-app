@@ -12,6 +12,7 @@ import {
 
 
 type Props = {
+  name: string;
 }
 
 const Nav = styled.nav`
@@ -42,7 +43,7 @@ const HeaderMenu = styled.span`
   color: white;
 `
 
-function Header(props: Props) {
+function Header({name}: Props) {
   return (
     <Router>
       <header>
@@ -50,7 +51,7 @@ function Header(props: Props) {
           <MenuList>
             <MenuElement>
               <Link to="/">
-                <HeaderMenu>Sibyl</HeaderMenu>
+                <HeaderMenu>{name}</HeaderMenu>
               </Link>
             </MenuElement>
             <MenuElement>
