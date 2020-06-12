@@ -5,7 +5,6 @@ import store from '../../store/sample';
 
 import Circle from '../../components/charts/circle';
 
-Modal.setAppElement('#modal');
 
 const data = {
   name: "１日の活動時間",
@@ -18,33 +17,11 @@ const data = {
 }
 
 const Pomodoro = () => {
-  var subtitle;
-  const [modalIsOpen,setIsOpen] = React.useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
-  
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-  }
-  
-  function closeModal() {
-    setIsOpen(false);
-  }
-
   const click = (e) => {
     store.dispatch({ type: 'INCREMENT' })
-    setIsOpen(true);
   }
   return (
   <>
-    <Modal
-      isOpen={modalIsOpen}
-      onAfterOpen={afterOpenModal}
-      onRequestClose={closeModal}
-      contentLabel="Example Modal"
-    >
-   </Modal>
     <Circle r={200} data={data} />
     <table>
       <tr>
