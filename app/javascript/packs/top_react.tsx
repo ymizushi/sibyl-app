@@ -2,77 +2,56 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as Modal from 'react-modal';
 
-import Circle from './components/charts/circle';
+import Header from './components/header/Header';
 
-import store from './store/sample';
 
- Modal.setAppElement('#modal');
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-const data = {
-  name: "１日の活動時間",
-  elements: [
-    {name: "study", amount: 80},
-    {name: "running", amount: 80},
-    {name: "asleep", amount: 300}
-  ],
-  total: 24 * 60
+
+
+export default function AppHoge() {
+  return (
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+      </div>
+    </Router>
+  );
 }
 
 
-const App = ({name: string}) => {
-  var subtitle;
-  const [modalIsOpen,setIsOpen] = React.useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
-  
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-  }
-  
-  function closeModal() {
-    setIsOpen(false);
-  }
 
-  const click = (e) => {
-    store.dispatch({ type: 'INCREMENT' })
-    setIsOpen(true);
-  }
+const App = ({name: string}) => {
   return (
   <>
-    <Modal
-      isOpen={modalIsOpen}
-      onAfterOpen={afterOpenModal}
-      onRequestClose={closeModal}
-      contentLabel="Example Modal"
-    >
-    hoge
-   </Modal>
-    <Circle r={200} data={data} />
-    <table>
-      <tr>
-        <th>name </th>
-        <th>amount</th>
-      </tr>
-      {
-        data.elements.map ( e => {
-          return <tr>
-            <td>{e.name}</td>
-            <td>{e.amount}</td>
-          </tr>
-        }
-        )
-      }
-    </table>
-    <div id="modal-point"></div>
-    <button onClick={click}>click</button>
+    <Header />
   </>
 )
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <App id="app" name="sibyl" />,
+    <App name="sibyl" />,
     document.body.appendChild(document.createElement('div')),
   )
 })
