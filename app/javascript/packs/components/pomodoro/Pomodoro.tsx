@@ -9,6 +9,16 @@ const Button = styled.button`
   color: white;
 `
 
+const Select = styled.select`
+  display: block;
+  margin 1rem auto;
+  width: 10rem;
+  height: 2rem;
+`
+
+const PomodoroDiv = styled.div`
+`
+
 const Pomodoro: React.FC<Props> = () => {
   const [timer, setTimer] = React.useState(1500);
 
@@ -18,16 +28,16 @@ const Pomodoro: React.FC<Props> = () => {
   }
 
   return (
-    <>
-      <select>
+    <PomodoroDiv>
+      <Select>
         <option>coding</option>
         <option>reading</option>
         <option>english</option>
         <option>exercise</option>
-      </select>
+      </Select>
       <Circle seconds={timer} setTimer={setTimer}/>
       <Button onClick={onButtonClick}>クリア</Button>
-    </>
+    </PomodoroDiv>
   )
 }
 
