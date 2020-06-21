@@ -17,6 +17,8 @@ type Props = {
 }
 
 const Nav = styled.nav`
+  margin: 0rem;
+  padding: 1rem;
   background-color: #F6AE2D;
   font-size: 2rem;
   text-align: left;
@@ -24,14 +26,16 @@ const Nav = styled.nav`
 
 
 const MenuList = styled.ul`
-  list-style: none;
-   display: table;
+}
+`
+
+const RightMenuList = styled.ul`
 }
 `
 
 const MenuElementTitle = styled.li`
-  margin-left: 0px;
-  padding: 0px;
+  margin-left: 0rem;
+  padding: 0rem;
   display: inline;
 `
 
@@ -40,15 +44,32 @@ const MenuElement = styled.li`
   display: inline;
 `
 
+const RightMenuElement = styled.li`
+  margin: 0rem;
+  display: right;
+`
+
 const HeaderMenu = styled.span`
   color: white;
-  margin-left: 2em;
-  text-decoration: none;
+  margin-left: 2rem;
 `
 
 
 const HeaderTitle = styled(HeaderMenu)`
-  font-size: 3rem;
+  margin-left: 1rem;
+  font-size: 2.5rem;
+`
+
+const LeftMenu = styled.div`
+  float: left;
+`
+
+const RightMenu = styled.div`
+  float: right;
+`
+
+const ClearBoth = styled.div`
+  clear: both;
 `
 
 function Header({name}: Props) {
@@ -56,22 +77,30 @@ function Header({name}: Props) {
     <Router>
       <header>
         <Nav>
-          <MenuList>
-            <MenuElement>
-              <Link to="/">
-                <HeaderTitle>{name}</HeaderTitle>
-              </Link>
-            </MenuElement>
-            <MenuElement>
-              <Link to="/pomodoro"><HeaderMenu>pomodoro</HeaderMenu></Link>
-            </MenuElement>
-            <MenuElement>
-              <Link to="/statistics"><HeaderMenu>statistics</HeaderMenu></Link>
-            </MenuElement>
-          </MenuList>
-          <MenuList>
-            <MenuElement><HeaderMenu>mizushi@gmail.com</HeaderMenu></MenuElement>
-          </MenuList>
+          <LeftMenu>
+            <MenuList>
+                <MenuElement>
+                  <Link to="/" style={{ textDecoration: 'none' }}>
+                    <HeaderTitle>{name}</HeaderTitle>
+                  </Link>
+                </MenuElement>
+                <MenuElement>
+                  <Link to="/pomodoro" style={{ textDecoration: 'none' }}><HeaderMenu>pomodoro</HeaderMenu></Link>
+                </MenuElement>
+                <MenuElement>
+                  <Link to="/statistics" style={{ textDecoration: 'none' }}><HeaderMenu>statistics</HeaderMenu></Link>
+                </MenuElement>
+            </MenuList>
+          </LeftMenu>
+
+          <RightMenu>
+            <MenuList>
+                <MenuElement>
+                  <HeaderMenu>mizushi@gmail.com</HeaderMenu>
+                </MenuElement>
+            </MenuList>
+          </RightMenu>
+          <ClearBoth />
         </Nav>
       </header>
       <Switch>
