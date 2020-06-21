@@ -4,14 +4,17 @@ import styled from 'styled-components';
 
 type Props = {}
 
+const Button = styled.button`
+  background-color: #FF3C3C;
+  color: white;
+`
+
 const Pomodoro: React.FC<Props> = () => {
-  const Button = styled.button`
-    background-color: #FF3C3C;
-    color: white;
-  `
+  const [timer, setTimer] = React.useState(1500);
 
   const onButtonClick = (e) => {
     console.log("button clicked");
+    setTimer(1500);
   }
 
   return (
@@ -22,7 +25,7 @@ const Pomodoro: React.FC<Props> = () => {
         <option>english</option>
         <option>exercise</option>
       </select>
-      <Circle seconds={100} />
+      <Circle seconds={timer} setTimer={setTimer}/>
       <Button onClick={onButtonClick}>クリア</Button>
     </>
   )
@@ -31,23 +34,35 @@ const Pomodoro: React.FC<Props> = () => {
 
 type CircleProps = {
   seconds: number;
+  setTimer: any;
 }
 
+const Timer = styled.div`
+  width: 10em;
+  height: 10em;
+  border-radius: 5em;
+  background-color: #FF3C3C;
+`
+const TimerText = styled.div`
+  margin-left: 4em;
+  padding-top: 4em;
+  color: white;
+`
+
 const Circle = (props: CircleProps) => {
-  const Timer = styled.div`
-    width: 10em;
-    height: 10em;
-    border-radius: 5em;
-    background-color: #FF3C3C;
-  `
-  const TimerText = styled.div`
-    margin-left: 4em;
-    padding-top: 4em;
-    color: white;
-  `
+  const [isStop, setIsStop] = React.useState(true);
+  const [intervalNum, setIntervalNum] = React.useState(null);
+
+  const setTimer = () => props.setTimer(prevCount =>  prevCount - 1);
 
   const onTimerClick = (e) => {
-    console.log("timer clicked");
+    if (isStop) {
+      setIsStop(false);
+      setIntervalNum(setInterval(setTimer, 1000));
+    } else {
+      clearInterval(intervalNum);
+      setIsStop(true);
+    }
   }
 
   return (
