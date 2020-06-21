@@ -3,7 +3,11 @@ import * as ReactDOM from 'react-dom';
 
 import Header from './components/header/Header';
 
-const App = ({name: string}) => {
+type Props = {
+  name: string;
+}
+
+const App = ({name}: Props) => {
   return (
   <>
     <Header name={name} />
@@ -13,7 +17,7 @@ const App = ({name: string}) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <App name="sibyl" />,
+    <App name="Sibyl" />,
     document.body.appendChild(document.createElement('div')),
   )
 })

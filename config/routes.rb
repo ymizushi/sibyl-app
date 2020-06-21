@@ -6,4 +6,6 @@ Rails.application.routes.draw do
       get 'activity_stat', to: 'activities#stat'
     end
   end
+  get 'pomodoro', to: 'top#index'
+  get 'statistics', to: 'top#index'
 end

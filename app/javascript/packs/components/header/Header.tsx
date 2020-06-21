@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import Pomodoro from '../pomodoro/Pomodoro';
+import Statistics from '../statistics/Statistics';
 
 import {
   BrowserRouter as Router,
@@ -41,6 +42,13 @@ const MenuElement = styled.li`
 
 const HeaderMenu = styled.span`
   color: white;
+  margin-left: 2em;
+  text-decoration: none;
+`
+
+
+const HeaderTitle = styled(HeaderMenu)`
+  font-size: 3rem;
 `
 
 function Header({name}: Props) {
@@ -51,7 +59,7 @@ function Header({name}: Props) {
           <MenuList>
             <MenuElement>
               <Link to="/">
-                <HeaderMenu>{name}</HeaderMenu>
+                <HeaderTitle>{name}</HeaderTitle>
               </Link>
             </MenuElement>
             <MenuElement>
@@ -69,6 +77,9 @@ function Header({name}: Props) {
       <Switch>
         <Route path="/pomodoro">
           <Pomodoro />
+        </Route>
+        <Route path="/statistics">
+          <Statistics />
         </Route>
       </Switch>
     </Router>

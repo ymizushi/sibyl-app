@@ -1,47 +1,58 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as Modal from 'react-modal';
-import store from '../../store/sample';
+import styled from 'styled-components';
 
-import Circle from '../../components/charts/circle';
+type Props = {}
 
+const Pomodoro: React.FC<Props> = () => {
+  const Button = styled.button`
+    background-color: #FF3C3C;
+    color: white;
+  `
 
-const data = {
-  name: "１日の活動時間",
-  elements: [
-    {name: "study", amount: 80},
-    {name: "running", amount: 80},
-    {name: "asleep", amount: 300}
-  ],
-  total: 24 * 60
+  const onButtonClick = (e) => {
+    console.log("button clicked");
+  }
+
+  return (
+    <>
+      <select>
+        <option>勉強</option>
+      </select>
+      <Circle minutes={10} seconds={10} />
+      <Button onClick={onButtonClick}>クリア</Button>
+    </>
+  )
 }
 
-const Pomodoro = () => {
-  const click = (e) => {
-    store.dispatch({ type: 'INCREMENT' })
+
+type CircleProps = {
+  minutes: number;
+  seconds: number;
+}
+
+const Circle = (props: CircleProps) => {
+  const Timer = styled.div`
+    width: 10em;
+    height: 10em;
+    border-radius: 5em;
+    background-color: #FF3C3C;
+  `
+  const TimerText = styled.div`
+    margin-left: 4em;
+    padding-top: 4em;
+    color: white;
+  `
+
+  const onTimerClick = (e) => {
+    console.log("timer clicked");
   }
+
   return (
-  <>
-    <Circle r={200} data={data} />
-    <table>
-      <tr>
-        <th>name </th>
-        <th>amount</th>
-      </tr>
-      {
-        data.elements.map ( e => {
-          return <tr>
-            <td>{e.name}</td>
-            <td>{e.amount}</td>
-          </tr>
-        }
-        )
-      }
-    </table>
-    <div id="modal-point"></div>
-    <button onClick={click}>click</button>
-  </>
-)
+    <Timer onClick={onTimerClick}>
+      <TimerText>{props.minutes}:{props.seconds}</TimerText>
+    </Timer>
+  )
 }
 
 export default Pomodoro;
