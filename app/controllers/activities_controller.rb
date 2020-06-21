@@ -13,7 +13,7 @@ class ActivitiesController < ApplicationController
   end
 
   def stat
-      render json: { name: "yamada"}
+      render json: { status: "ok"}
   end
 
   # GET /activities/new
