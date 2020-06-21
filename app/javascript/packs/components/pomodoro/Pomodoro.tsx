@@ -17,9 +17,12 @@ const Pomodoro: React.FC<Props> = () => {
   return (
     <>
       <select>
-        <option>勉強</option>
+        <option>coding</option>
+        <option>reading</option>
+        <option>english</option>
+        <option>exercise</option>
       </select>
-      <Circle minutes={10} seconds={10} />
+      <Circle seconds={100} />
       <Button onClick={onButtonClick}>クリア</Button>
     </>
   )
@@ -27,7 +30,6 @@ const Pomodoro: React.FC<Props> = () => {
 
 
 type CircleProps = {
-  minutes: number;
   seconds: number;
 }
 
@@ -50,7 +52,7 @@ const Circle = (props: CircleProps) => {
 
   return (
     <Timer onClick={onTimerClick}>
-      <TimerText>{props.minutes}:{props.seconds}</TimerText>
+      <TimerText>{Math.floor(props.seconds / 60) }:{props.seconds % 60 }</TimerText>
     </Timer>
   )
 }
