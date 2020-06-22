@@ -36,24 +36,31 @@ const Option = styled.option`
 const PomodoroDiv = styled.div`
 `
 
-const Pomodoro: React.FC<Props> = () => {
 
+
+const Pomodoro: React.FC<Props> = () => {
+  const [selected, setSelected] = React.useState("");
+
+  const getSelectedValue = (e) => {
+    setSelected(e.target.value)
+  }
 
   return (
     <PomodoroDiv>
-      <Select>
+      <Select onChange={getSelectedValue}>
         <Option>coding</Option>
         <Option>reading</Option>
         <Option>english</Option>
         <Option>exercise</Option>
       </Select>
-      <Circle />
+      <Circle selectedValue={selected} />
     </PomodoroDiv>
   )
 }
 
 
 type CircleProps = {
+  selectedValue: string;
 }
 
 const Timer = styled.div`
@@ -81,7 +88,7 @@ const Circle = (props: CircleProps) => {
     if (isStop) {
       setIsStop(false);
       setIntervalNum(setInterval(setTiming, 1000));
-      addActivity("start", "english")
+      addActivity("start", props.selectedValue)
     } else {
       clearInterval(intervalNum);
       setIsStop(true);
@@ -111,7 +118,7 @@ const Circle = (props: CircleProps) => {
 function  addActivity(status: "start"|"end"|"stop", kind: string) {
   const item: any = document.getElementsByName('csrf-token').item(0);
   const csrfToken = item.content;
-  fetch('http://localhost:3000/api/v1/activities.json', {
+  fetch('http://localhost:4000/api/v1/activities.json', {
       method: 'POST',
       body: JSON.stringify({
         status,
