@@ -16,10 +16,35 @@ const data = {
   total: 24 * 60
 }
 
+
+const fetchData = async () => {
+  const item: any = document.getElementsByName('csrf-token').item(0);
+  const csrfToken = item.content;
+  const res = await fetch('http://localhost:4000/api/v1/activities.json', {
+    method: 'GET',
+    headers: new Headers({
+      'Content-type' : 'application/json',
+      'X-CSRF-Token': csrfToken
+    })
+    })
+  const data = await res.json();
+  console.log(data);
+}
+
 const Statistics = () => {
   const click = (e) => {
     store.dispatch({ type: 'INCREMENT' })
   }
+
+  fetchData()
+    .then(data => {
+        console.log(JSON.stringify(data));
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
+
   return (
   <>
     <Circle r={200} data={data} />
