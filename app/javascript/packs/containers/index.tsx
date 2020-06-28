@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
-import {increment} from '../actions'
+import {increment, fetchActivities} from '../actions'
 
 const mapStateToProps = state => ({
-  counter: state.counter
+  counter: state.counter,
+  activities: state.activities
 }
 )
 
 const mapDispatchToProps = dispatch => ({
-  increment: () => dispatch(increment())
+  increment: () => dispatch(increment()),
+  fetchActivities: () => dispatch(fetchActivities())
 })
 
 
@@ -16,9 +18,13 @@ const mapDispatchToProps = dispatch => ({
 const Increment = (props: any) => {
   return (
     <button
-      onClick={ () => { props.increment(); console.log(props.counter); } }
+      onClick={ () => { 
+        props.increment();
+        console.log(props.counter);
+      }
+      }
     >
-      buttonです
+      incrementします
     </button>
   )
 }

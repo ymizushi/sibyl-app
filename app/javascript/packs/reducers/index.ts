@@ -11,6 +11,32 @@ function counter(state = 0, action) {
   }
 }
 
+
+const fetchActivities = async () => {
+  const item: any = document.getElementsByName('csrf-token').item(0);
+  const csrfToken = item.content;
+  const res = await fetch('http://localhost:3000/api/v1/activities.json', {
+    method: 'GET',
+    headers: new Headers({
+      'Content-type' : 'application/json',
+      'X-CSRF-Token': csrfToken
+    })
+    })
+  const data = await res.json();
+  console.log(data);
+  return data;
+}
+
+
+function activities(state = [], action) {
+  switch (action.type) {
+    case 'FETCH_ACTIVITIES':
+      return fetchActivities();
+    default:
+      return state;
+  }
+}
+
 function sibyl(state = {}, action) {
   switch (action.type) {
     case 'SET_NAME':
@@ -22,5 +48,6 @@ function sibyl(state = {}, action) {
 
 export default combineReducers({
   sibyl,
-  counter
+  counter,
+  activities
 })

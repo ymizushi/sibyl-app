@@ -21,7 +21,7 @@ const data = {
 const fetchData = async () => {
   const item: any = document.getElementsByName('csrf-token').item(0);
   const csrfToken = item.content;
-  const res = await fetch('http://localhost:4000/api/v1/activities.json', {
+  const res = await fetch('http://localhost:3000/api/v1/activities.json', {
     method: 'GET',
     headers: new Headers({
       'Content-type' : 'application/json',
@@ -36,14 +36,15 @@ const Statistics = () => {
   const click = (e) => {
   }
 
-  fetchData()
-    .then(data => {
-        console.log(JSON.stringify(data));
-    })
-    .catch(err => {
-        console.log(err);
-    })
-
+  React.useEffect(() => {
+    fetchData()
+      .then(data => {
+          console.log(JSON.stringify(data));
+      })
+      .catch(err => {
+          console.log(err);
+      })
+  });
 
   return (
   <>
