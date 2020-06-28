@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as Modal from 'react-modal';
-import store from '../../store/sample';
 
 import Circle from '../../components/charts/circle';
+
+import Increment from '../../containers'
 
 
 const data = {
@@ -33,7 +34,6 @@ const fetchData = async () => {
 
 const Statistics = () => {
   const click = (e) => {
-    store.dispatch({ type: 'INCREMENT' })
   }
 
   fetchData()
@@ -65,6 +65,7 @@ const Statistics = () => {
     </table>
     <div id="modal-point"></div>
     <button onClick={click}>click</button>
+    <Increment />
   </>
 )
 }

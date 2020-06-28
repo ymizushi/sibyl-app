@@ -118,7 +118,7 @@ const Circle = (props: CircleProps) => {
 function  addActivity(status: "start"|"end"|"stop", kind: string) {
   const item: any = document.getElementsByName('csrf-token').item(0);
   const csrfToken = item.content;
-  fetch('http://localhost:4000/api/v1/activities.json', {
+  fetch('http://localhost:3000/api/v1/activities.json', {
       method: 'POST',
       body: JSON.stringify({
         status,
