@@ -17,7 +17,6 @@ const data = {
   total: 24 * 60
 }
 
-
 const fetchData = async () => {
   const item: any = document.getElementsByName('csrf-token').item(0);
   const csrfToken = item.content;
@@ -28,41 +27,36 @@ const fetchData = async () => {
       'X-CSRF-Token': csrfToken
     })
     })
-  const data = await res.json();
-  console.log(data);
+  return res.json();
 }
 
 const Statistics = () => {
   const click = (e) => {
   }
 
-  React.useEffect(() => {
+  const [activities, setActivities] = React.useState([]);
+
+  React.useEffect( () => {
     fetchData()
       .then(data => {
-          console.log(JSON.stringify(data));
+        console.log(data);
+        setActivities(data);
       })
       .catch(err => {
-          console.log(err);
-      })
-  });
-
+      });
+  }, []);
   return (
   <>
     <Circle r={200} data={data} />
     <table>
       <tr>
-        <th>name </th>
-        <th>amount</th>
+        <th>kind </th>
+        <th>status</th>
+        <th>created_at</th>
       </tr>
-      {
-        data.elements.map ( e => {
-          return <tr>
-            <td>{e.name}</td>
-            <td>{e.amount}</td>
-          </tr>
-        }
-        )
-      }
+      { activities.map(e => { 
+        return <tr><th> { e.kind } </th><th>{ e.status} </th><th> { e.created_at }</th></tr>
+      })} 
     </table>
     <div id="modal-point"></div>
     <button onClick={click}>click</button>

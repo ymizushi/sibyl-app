@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 type Props = {}
@@ -84,7 +83,7 @@ const Circle = (props: CircleProps) => {
 
   const setTiming = () => setTimer(prevCount =>  prevCount - 1);
 
-  const onTimerClick = (e) => {
+  const timerClick = (e) => {
     if (isStop) {
       setIsStop(false);
       setIntervalNum(setInterval(setTiming, 1000));
@@ -92,23 +91,25 @@ const Circle = (props: CircleProps) => {
     } else {
       clearInterval(intervalNum);
       setIsStop(true);
+      addActivity("stop", props.selectedValue)
     }
   }
 
-  const onButtonClick = (e) => {
+  const clearButtonClick = (e) => {
     setTimer(1500);
     if (intervalNum) {
       clearInterval(intervalNum);
       setIsStop(true);
+      addActivity("end", props.selectedValue)
     }
   }
 
   return (
     <>
-      <Timer onClick={onTimerClick}>
+      <Timer onClick={timerClick}>
         <TimerText>{Math.floor(timer / 60) }:{formatNumToString(timer % 60) }</TimerText>
       </Timer>
-      <Button onClick={onButtonClick}>クリア</Button>
+      <Button onClick={clearButtonClick}>クリア</Button>
     </>
   )
 }

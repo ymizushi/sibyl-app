@@ -2,13 +2,16 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import Header from './components/header/Header';
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 
 import reducer from './reducers/index'
 
 import { Provider } from 'react-redux'
 
-const store = createStore(reducer)
+const store = createStore(reducer, applyMiddleware(thunk, logger))
 
 
 type Props = {
